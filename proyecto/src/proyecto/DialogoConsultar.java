@@ -143,6 +143,7 @@ public class DialogoConsultar extends JDialog implements ActionListener {
 	}
 	double getPrecio(int modelo){
 		double precio;
+		
 		switch(modelo){
 		case 0: precio=Tienda.precio0;
 				break;
