@@ -138,9 +138,11 @@ public class DialogoConsultar extends JDialog implements ActionListener {
 		
 		this.txtPrecio.setText(String.valueOf(precio));
 	}
+	
 	int getModelo(){
 		return cboModelo.getSelectedIndex();
 	}
+	
 	double getPrecio(int modelo){
 		double precio;
 		
