@@ -20,7 +20,7 @@ public class DialogoConsultar extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtPrecio;
-	private JTextField txtAutor;
+	private JTextField txtAncho;
 	private JTextField txtAlto;
 	private JButton btnCerrar;
 	private JTextField txtFondo;
@@ -90,17 +90,19 @@ public class DialogoConsultar extends JDialog implements ActionListener {
 		txtPrecio.setColumns(10);
 		txtPrecio.setText(String.valueOf(this.getPrecio(this.getModelo())));
 		
-		txtAutor = new JTextField();
-		txtAutor.setBounds(105, 74, 155, 20);
-		txtAutor.setEditable(false);
-		contentPanel.add(txtAutor);
-		txtAutor.setColumns(10);
+		txtAncho = new JTextField();
+		txtAncho.setBounds(105, 74, 155, 20);
+		txtAncho.setEditable(false);
+		contentPanel.add(txtAncho);
+		txtAncho.setColumns(10);
+		txtAncho.setText(String.valueOf(this.getAncho(this.getModelo())));
 		
 		txtAlto = new JTextField();
 		txtAlto.setBounds(105, 99, 155, 20);
 		txtAlto.setEditable(false);
 		contentPanel.add(txtAlto);
 		txtAlto.setColumns(10);
+		txtAlto.setText(String.valueOf(this.getAlto(this.getModelo())));
 		
 		btnCerrar = new JButton("Cerrar");
 		btnCerrar.setBounds(335, 30, 89, 23);
@@ -135,14 +137,19 @@ public class DialogoConsultar extends JDialog implements ActionListener {
 	protected void do_cboCodigo_actionPerformed(ActionEvent arg0) {
 		int modelo = getModelo();
 		double precio = getPrecio(modelo);
+		double ancho = getAncho(modelo);
+		double alto = getAlto(modelo);
 		
 		this.txtPrecio.setText(String.valueOf(precio));
+		this.txtAncho.setText(String.valueOf(ancho));
+		this.txtAlto.setText(String.valueOf(alto));
 	}
 	
 	int getModelo(){
 		return cboModelo.getSelectedIndex();
 	}
 	
+	// Add 
 	double getPrecio(int modelo){
 		double precio;
 		
@@ -158,5 +165,23 @@ public class DialogoConsultar extends JDialog implements ActionListener {
 		default: precio=Tienda.precio4;		
 		}
 		return precio;
+	}
+	double getAncho(int modelo){
+		switch(modelo){
+		case 0: return Tienda.ancho0;
+		case 1: return Tienda.ancho1;
+		case 2: return Tienda.ancho2;
+		case 3: return Tienda.ancho3;
+		default: return Tienda.ancho4;		
+		}
+	}
+	double getAlto(int modelo){
+		switch(modelo){
+		case 0: return Tienda.alto0;
+		case 1: return Tienda.alto1;
+		case 2: return Tienda.alto2;
+		case 3: return Tienda.alto3;
+		default: return Tienda.alto4;
+		}
 	}
 }
