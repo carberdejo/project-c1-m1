@@ -113,12 +113,15 @@ public class DialogoConsultar extends JDialog implements ActionListener {
 		txtFondo.setEditable(false);
 		contentPanel.add(txtFondo);
 		txtFondo.setColumns(10);
+		txtFondo.setText(String.valueOf(this.getFondo(this.getModelo())));
 		
 		txtQuemadores = new JTextField();
 		txtQuemadores.setBounds(105, 147, 155, 20);
 		txtQuemadores.setEditable(false);
 		contentPanel.add(txtQuemadores);
 		txtQuemadores.setColumns(10);
+		txtQuemadores.setText(String.valueOf(this.getQuemadores(this.getModelo())));
+		
 		contentPanel.add(btnCerrar);
 	}
 	public void actionPerformed(ActionEvent arg0) {
@@ -139,10 +142,15 @@ public class DialogoConsultar extends JDialog implements ActionListener {
 		double precio = getPrecio(modelo);
 		double ancho = getAncho(modelo);
 		double alto = getAlto(modelo);
+		double fondo = getFondo(modelo);
+		double quemadores = getQuemadores(modelo);
 		
+		//Devolver valor a la caja de texto
 		this.txtPrecio.setText(String.valueOf(precio));
 		this.txtAncho.setText(String.valueOf(ancho));
 		this.txtAlto.setText(String.valueOf(alto));
+		this.txtFondo.setText(String.valueOf(fondo));
+		this.txtQuemadores.setText(String.valueOf(quemadores));
 	}
 	
 	int getModelo(){
@@ -182,6 +190,24 @@ public class DialogoConsultar extends JDialog implements ActionListener {
 		case 2: return Tienda.alto2;
 		case 3: return Tienda.alto3;
 		default: return Tienda.alto4;
+		}
+	}
+	double getFondo(int modelo){
+		switch(modelo){
+		case 0: return Tienda.fondo0;
+		case 1: return Tienda.fondo1;
+		case 2: return Tienda.fondo2;
+		case 3: return Tienda.fondo3;
+		default: return Tienda.fondo4;
+		}
+	}
+	double getQuemadores(int modelo){
+		switch(modelo){
+		case 0: return Tienda.quemadores0;
+		case 1: return Tienda.quemadores1;
+		case 2: return Tienda.quemadores2;
+		case 3: return Tienda.quemadores3;
+		default: return Tienda.quemadores4;
 		}
 	}
 }

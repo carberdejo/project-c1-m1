@@ -30,7 +30,7 @@ public class Tienda extends JFrame implements ActionListener {
 	private JMenuItem mntModificar;
 	private JMenuItem mntConfDscto;
 
-	
+	//DEclaracion de variables globales
 	// Datos mínimos de la primera cocina
 	public static String modelo0 = "Mabe EMP6120PG0";
 	public static double precio0 = 949.0;
