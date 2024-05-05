@@ -62,7 +62,7 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 		
 		txtS = new JTextArea();
 		scpPane.setViewportView(txtS);
-		
+		mostrarReporte1();
 	}
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnCerrar) {
@@ -77,11 +77,13 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 		int tipo;
 		
 		//Leer datos de entrada
-		
+		mostrarReporte1();
+		mostrarReporte2();
+		mostrarReporte3();
+		mostrarReporte4();
 		tipo = getTipo();
-		//proceso de calculo
 		
-		//mostrar Resultado
+		//calcular y mostrar Resultado
 		switch (tipo) {
 		case 0:
 			mostrarReporte1();			

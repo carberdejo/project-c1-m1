@@ -9,11 +9,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class DialogoCantOptima extends JDialog {
+public class DialogoCantOptima extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCantOptim;
+	private JButton btnAceptar;
 
 	/**
 	 * Launch the application.
@@ -49,13 +52,26 @@ public class DialogoCantOptima extends JDialog {
 		txtCantOptim.setColumns(10);
 		txtCantOptim.setText(String.valueOf(Tienda.cantidadOptima));
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(this);
 		btnAceptar.setBounds(335, 11, 89, 23);
 		contentPanel.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(335, 41, 89, 23);
 		contentPanel.add(btnCancelar);
+	}
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnAceptar) {
+			do_btnAceptar_actionPerformed(arg0);
+		}
+	}
+	protected void do_btnAceptar_actionPerformed(ActionEvent arg0) {
+		//declaracion de variables
+		String nuevoPrec;
+		//Leer datos de entrada
+		nuevoPrec=this.txtCantOptim.getText();
+		Tienda.cantidadOptima = Integer.valueOf(nuevoPrec);
 	}
 }
 

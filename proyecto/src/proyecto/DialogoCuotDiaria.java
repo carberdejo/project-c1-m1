@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 public class DialogoCuotDiaria extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtCantOptim;
+	private JTextField txtCuotDia;
 	private JButton btnAceptar;
 	private JButton btnCancelar;
 
@@ -47,10 +47,10 @@ public class DialogoCuotDiaria extends JDialog implements ActionListener {
 		lblCantOptim.setBounds(10, 29, 155, 14);
 		contentPanel.add(lblCantOptim);
 		
-		txtCantOptim = new JTextField();
-		txtCantOptim.setBounds(159, 23, 127, 23);
-		contentPanel.add(txtCantOptim);
-		txtCantOptim.setColumns(10);
+		txtCuotDia = new JTextField();
+		txtCuotDia.setBounds(159, 23, 127, 23);
+		contentPanel.add(txtCuotDia);
+		txtCuotDia.setColumns(10);
 		numeroCO();
 		
 		
@@ -65,7 +65,7 @@ public class DialogoCuotDiaria extends JDialog implements ActionListener {
 		contentPanel.add(btnCancelar);
 	}
 	void numeroCO(){
-		this.txtCantOptim.setText(String.valueOf(Tienda.cuotaDiaria));
+		this.txtCuotDia.setText(String.valueOf(Tienda.cuotaDiaria));
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCancelar) {
@@ -76,7 +76,7 @@ public class DialogoCuotDiaria extends JDialog implements ActionListener {
 		}
 	}
 	protected void do_btnAceptar_actionPerformed(ActionEvent e) {
-		String newPrecio = this.txtCantOptim.getText();
+		String newPrecio = this.txtCuotDia.getText();
 		Tienda.cuotaDiaria = Double.valueOf(newPrecio);
 		System.out.println(Tienda.cuotaDiaria);
 		//Tienda.cuotaDiaria=Integer.parseInt(txtCantOptim.getText());

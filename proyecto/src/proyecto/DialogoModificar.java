@@ -212,29 +212,56 @@ public class DialogoModificar extends JDialog implements ActionListener {
 		}
 	}
 	protected void do_btnGrabar_actionPerformed(ActionEvent arg0) {
-		String newPrice = this.txtPrecio.getText();
-		int index = this.cboCodigo.getSelectedIndex();
+		//Declarar Variables
+		String newPrice,newAlto,newAncho,newFondo,newQuemadores;
+		int index;
+		//Leer datos de entrada
+		newPrice = this.txtPrecio.getText();
+		newAlto = this.txtAlto.getText();
+		newAncho = this.txtAncho.getText();
+		newFondo = this.txtFondo.getText();
+		newQuemadores = this.txtQuemadores.getText();
+		index = this.cboCodigo.getSelectedIndex();
 		System.out.println(newPrice);
 		System.out.println(index);
-		
+		//PROCESO DE CALCULO
 		switch (index) {
 		case 0:
 			Tienda.precio0 = Double.valueOf(newPrice);
+			Tienda.alto0 = Double.valueOf(newAlto);
+			Tienda.ancho0 = Double.valueOf(newAncho);
+			Tienda.fondo0 = Double.valueOf(newFondo);
+			Tienda.quemadores0 = Integer.valueOf(newQuemadores);
 			break;
 		case 1:
 			Tienda.precio1 = Double.valueOf(newPrice);
+			Tienda.alto1 = Double.valueOf(newAlto);
+			Tienda.ancho1 = Double.valueOf(newAncho);
+			Tienda.fondo1 = Double.valueOf(newFondo);
+			Tienda.quemadores1 = Integer.valueOf(newQuemadores);
 			break;
 		case 2:
 			Tienda.precio2 = Double.valueOf(newPrice);
+			Tienda.alto2 = Double.valueOf(newAlto);
+			Tienda.ancho2 = Double.valueOf(newAncho);
+			Tienda.fondo2 = Double.valueOf(newFondo);
+			Tienda.quemadores2 = Integer.valueOf(newQuemadores);
 			break;
 		case 3:
 			Tienda.precio3 = Double.valueOf(newPrice);
-			break;
-		case 4:
-			Tienda.precio4 = Double.valueOf(newPrice);
+			Tienda.alto3 = Double.valueOf(newAlto);
+			Tienda.ancho3 = Double.valueOf(newAncho);
+			Tienda.fondo3 = Double.valueOf(newFondo);
+			Tienda.quemadores3 = Integer.valueOf(newQuemadores);
 			break;
 		default:
-			break;
+			Tienda.precio4 = Double.valueOf(newPrice);
+			Tienda.alto4 = Double.valueOf(newAlto);
+			Tienda.ancho4 = Double.valueOf(newAncho);
+			Tienda.fondo4 = Double.valueOf(newFondo);
+			Tienda.quemadores4 = Integer.valueOf(newQuemadores);
+			
+		
 		}
 	}
 }		
