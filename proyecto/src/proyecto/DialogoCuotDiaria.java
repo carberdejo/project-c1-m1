@@ -76,8 +76,10 @@ public class DialogoCuotDiaria extends JDialog implements ActionListener {
 		}
 	}
 	protected void do_btnAceptar_actionPerformed(ActionEvent e) {
-		
-		Tienda.cuotaDiaria=Integer.parseInt(txtCantOptim.getText());
+		String newPrecio = this.txtCantOptim.getText();
+		Tienda.cuotaDiaria = Double.valueOf(newPrecio);
+		System.out.println(Tienda.cuotaDiaria);
+		//Tienda.cuotaDiaria=Integer.parseInt(txtCantOptim.getText());
 	}
 	protected void do_btnCancelar_actionPerformed(ActionEvent e) {
 		dispose();

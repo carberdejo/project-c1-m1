@@ -62,6 +62,7 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 		
 		txtS = new JTextArea();
 		scpPane.setViewportView(txtS);
+		
 	}
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnCerrar) {
@@ -77,29 +78,30 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 		
 		//Leer datos de entrada
 		
-		tipo=getTipo();
+		tipo = getTipo();
 		//proceso de calculo
-		tipReporte=calcularTipo(tipo,ventModel,ventOptima,precProm,promMayMen);
-		//mostrar Resultado
-		ventModel=mostrarReporte1();
-		ventOptima=mostrarReporte2();
-		precProm=mostrarReporte2();
-		promMayMen=mostrarReporte2();
 		
+		//mostrar Resultado
+		switch (tipo) {
+		case 0:
+			mostrarReporte1();			
+			break;
+		case 1:
+			mostrarReporte2();					
+			break;
+		case 2:
+			mostrarReporte3();			
+			break;
+		default:
+			mostrarReporte4();			
+		}
 	}
 	int getTipo(){
 		return cboTipo.getSelectedIndex();
 	}
-	String calcularTipo(int tipo,String ventModel,String ventOptima,String precProm,String promMayMen){
-		switch(tipo){
-			case 0: return ventModel;
-			case 1: return ventOptima;
-			case 2: return precProm;
-			default: return promMayMen;
-		}
-	}
 	
-	String mostrarReporte1(){
+	
+	void mostrarReporte1(){
 		txtS.setText("");
 		txtS.append("VENTAS POR MODELO"+'\n');
 		txtS.append("Modelo : "+Tienda.modelo0+'\n');
@@ -107,33 +109,28 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 		txtS.append("Cantidad de unidades vendidas : "+DialogoVender.TotalVent1+'\n');
 		txtS.append("Importe total vendido : "+DialogoVender.impTotal0+'\n');
 		txtS.append("Aporte a la cuota diaria : "+Tienda.modelo0+'\n');
-		return null; 
 	}
-	String mostrarReporte2(){
+	void mostrarReporte2(){
 		txtS.setText("");
 		txtS.append("VENTAS EN RELACIÓN A LA VENTA ÓPTIMA"+Tienda.modelo0+'\n');
 		txtS.append("Modelo"+'\n');
 		txtS.append("VENTAS EN RELACIÓN A LA VENTA ÓPTIMA"+'\n');
 		txtS.append("VENTAS EN RELACIÓN A LA VENTA ÓPTIMA"+'\n');
-		return null;
 		
 	}
-	String mostrarReporte3(){
+	void mostrarReporte3(){
 		txtS.setText("");
 		txtS.append("PRECIOS EN RELACIÓN AL PRECIO PROMEDIO"+Tienda.modelo0+'\n');
 		txtS.append("VPRECIOS EN RELACIÓN AL PRECIO PROMEDIO"+'\n');
 		txtS.append("PRECIOS EN RELACIÓN AL PRECIO PROMEDIO"+'\n');
-		txtS.append("PRECIOS EN RELACIÓN AL PRECIO PROMEDIO"+'\n');
-		return null;
-		
+		txtS.append("PRECIOS EN RELACIÓN AL PRECIO PROMEDIO"+'\n');		
 	}
-	String mostrarReporte4(){
+	void mostrarReporte4(){
 		txtS.setText("");
 		txtS.append("PROMEDIOS, MENORES Y MAYORES"+Tienda.modelo0+'\n');
 		txtS.append("PROMEDIOS, MENORES Y MAYORES"+'\n');
 		txtS.append("PROMEDIOS, MENORES Y MAYORES"+'\n');
 		txtS.append("PROMEDIOS, MENORES Y MAYORES"+'\n');
-		return null;
 		
 	}
 	protected void do_btnCerrar_actionPerformed(ActionEvent arg0) {

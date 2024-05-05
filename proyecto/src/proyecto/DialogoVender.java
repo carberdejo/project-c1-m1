@@ -47,6 +47,8 @@ public class DialogoVender extends JDialog implements ActionListener {
 	
 	//Declaracion de variables globales
 	int modelo;
+	int totalCV = 0;
+	double totalIC;
 	/**
 	 * Launch the application.
 	 */
@@ -170,15 +172,24 @@ public class DialogoVender extends JDialog implements ActionListener {
 			tipoModelo=calcularTP(modelo);
 			//Calcular acumulador
 			incrementadorAcum(modelo,cantidad,iCompra);
+			//Advertencia
+			
 			//Mostrar resultado
 			System.out.println(cantidad);
 			System.out.println(precio);
+			
+			this.totalCV++;
+			totalIC+=iCompra;
+			
 			mostrarResultados(tipoModelo,precio,cantidad,iCompra,iDscto,iPagar,obsequio);
+			
+			if(this.totalCV %5 == 0){
+				JOptionPane.showMessageDialog(null, "Venta numero"+totalCV+"\nImporte Total general acumulado : "+totalIC+"\nPorcentaje de la cuota diaria :", "Advertencia", JOptionPane.WARNING_MESSAGE);			
+			}
 		} catch (Exception e) {
 			System.out.println(e);
 	        JOptionPane.showMessageDialog(null, "¡Cuidado! Necesitas llenar correctamente todos los inputs.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 		}
-		
 	}
 	int getCantidad(){
 		return Integer.parseInt(txtCantidad.getText());
@@ -220,6 +231,9 @@ public class DialogoVender extends JDialog implements ActionListener {
 		else
 			return Tienda.obsequio3;
 	}
+	
+	
+	
 	//calcularTipo de Modelo
 	String calcularTP(int modelo){
 		switch(modelo){
@@ -231,6 +245,7 @@ public class DialogoVender extends JDialog implements ActionListener {
 		}
 	}
 	//Contador y acumulador del Total de ventas,total de cantidades y total de importe
+	
 	void incrementadorAcum(int modelo,int cantidad,double iCompra){
 		switch(modelo){
 		case 0: TotalVent0++;
@@ -254,6 +269,7 @@ public class DialogoVender extends JDialog implements ActionListener {
 		  		impTotal4+=iCompra;		
 		}
 	}
+	
 	void mostrarResultados(String tipoModelo,double precio,int cantidad,double iCompra,double iDscto,double iPagar,String obsequio){
 		txtS.setText("");
 		imprimir("Modelo : /S. "+tipoModelo);
