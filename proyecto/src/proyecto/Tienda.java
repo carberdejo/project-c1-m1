@@ -80,6 +80,8 @@ public class Tienda extends JFrame implements ActionListener {
 	// Cuota diaria
 	public static double cuotaDiaria = 75000;
 	
+	//Importe total
+	
 	/**
 	 * Launch the application.
 	 */

@@ -49,22 +49,22 @@ public class DialogoObsequio extends JDialog {
 		getContentPane().add(lblUni6);
 		
 		txtObsequio1 = new JTextField();
-		txtObsequio1.setText("Cafetera");
 		txtObsequio1.setBounds(136, 21, 86, 20);
 		getContentPane().add(txtObsequio1);
 		txtObsequio1.setColumns(10);
+		txtObsequio1.setText(String.valueOf(Tienda.obsequio1));
 		
 		txtObsequio2 = new JTextField();
-		txtObsequio2.setText("Licuadora");
 		txtObsequio2.setBounds(136, 46, 86, 20);
 		getContentPane().add(txtObsequio2);
 		txtObsequio2.setColumns(10);
+		txtObsequio2.setText(String.valueOf(Tienda.obsequio2));
 		
 		txtObsequio3 = new JTextField();
-		txtObsequio3.setText("Extractor");
 		txtObsequio3.setBounds(136, 71, 86, 20);
 		getContentPane().add(txtObsequio3);
 		txtObsequio3.setColumns(10);
+		txtObsequio3.setText(String.valueOf(Tienda.obsequio3));
 		
 		JButton btnAcept = new JButton("Aceptar");
 		btnAcept.setBounds(318, 20, 89, 23);

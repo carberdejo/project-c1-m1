@@ -47,6 +47,7 @@ public class DialogoCantOptima extends JDialog {
 		txtCantOptim.setBounds(227, 23, 59, 23);
 		contentPanel.add(txtCantOptim);
 		txtCantOptim.setColumns(10);
+		txtCantOptim.setText(String.valueOf(Tienda.cantidadOptima));
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(335, 11, 89, 23);

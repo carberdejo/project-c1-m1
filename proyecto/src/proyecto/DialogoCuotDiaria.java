@@ -16,6 +16,7 @@ public class DialogoCuotDiaria extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCantOptim;
+	private JButton btnAceptar;
 	private JButton btnCancelar;
 
 	/**
@@ -50,22 +51,36 @@ public class DialogoCuotDiaria extends JDialog implements ActionListener {
 		txtCantOptim.setBounds(159, 23, 127, 23);
 		contentPanel.add(txtCantOptim);
 		txtCantOptim.setColumns(10);
+		numeroCO();
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(this);
 		btnAceptar.setBounds(335, 11, 89, 23);
 		contentPanel.add(btnAceptar);
 		
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(this);
-		btnCancelar.setBounds(335, 41, 89, 23);
+		btnCancelar.setBounds(335, 44, 89, 23);
 		contentPanel.add(btnCancelar);
+	}
+	void numeroCO(){
+		this.txtCantOptim.setText(String.valueOf(Tienda.cuotaDiaria));
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCancelar) {
 			do_btnCancelar_actionPerformed(e);
 		}
+		if (e.getSource() == btnAceptar) {
+			do_btnAceptar_actionPerformed(e);
+		}
+	}
+	protected void do_btnAceptar_actionPerformed(ActionEvent e) {
+		
+		Tienda.cuotaDiaria=Integer.parseInt(txtCantOptim.getText());
 	}
 	protected void do_btnCancelar_actionPerformed(ActionEvent e) {
+		dispose();
 	}
 }
 
