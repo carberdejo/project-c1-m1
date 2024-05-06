@@ -9,14 +9,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class DialogoDescuento extends JDialog {
+public class DialogoDescuento extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtPorcentaje1;
+	private JTextField txtPorcentaje2;
+	private JTextField txtPorcentaje3;
+	private JTextField txtPorcentaje4;
+	private JButton btnAceptar;
+	private JButton btnCancelar;
 
 	/**
 	 * Launch the application.
@@ -62,39 +66,72 @@ public class DialogoDescuento extends JDialog {
 			contentPanel.add(lblUni15);
 		}
 		{
-			textField = new JTextField();
-			textField.setBounds(126, 20, 86, 20);
-			contentPanel.add(textField);
-			textField.setColumns(10);
+			txtPorcentaje1 = new JTextField();
+			txtPorcentaje1.setBounds(126, 20, 86, 20);
+			contentPanel.add(txtPorcentaje1);
+			txtPorcentaje1.setColumns(10);
+			txtPorcentaje1.setText(String.valueOf(Tienda.porcentaje1));
 		}
 		{
-			textField_1 = new JTextField();
-			textField_1.setBounds(126, 45, 86, 20);
-			contentPanel.add(textField_1);
-			textField_1.setColumns(10);
+			txtPorcentaje2 = new JTextField();
+			txtPorcentaje2.setBounds(126, 45, 86, 20);
+			contentPanel.add(txtPorcentaje2);
+			txtPorcentaje2.setColumns(10);
+			txtPorcentaje2.setText(String.valueOf(Tienda.porcentaje2));
 		}
 		{
-			textField_2 = new JTextField();
-			textField_2.setBounds(126, 68, 86, 20);
-			contentPanel.add(textField_2);
-			textField_2.setColumns(10);
+			txtPorcentaje3 = new JTextField();
+			txtPorcentaje3.setBounds(126, 68, 86, 20);
+			contentPanel.add(txtPorcentaje3);
+			txtPorcentaje3.setColumns(10);
+			txtPorcentaje3.setText(String.valueOf(Tienda.porcentaje3));
 		}
 		{
-			textField_3 = new JTextField();
-			textField_3.setBounds(126, 93, 86, 20);
-			contentPanel.add(textField_3);
-			textField_3.setColumns(10);
+			txtPorcentaje4 = new JTextField();
+			txtPorcentaje4.setBounds(126, 93, 86, 20);
+			contentPanel.add(txtPorcentaje4);
+			txtPorcentaje4.setColumns(10);
+			txtPorcentaje4.setText(String.valueOf(Tienda.porcentaje4));
 		}
 		{
-			JButton btnAceptar = new JButton("Aceptar");
+			btnAceptar = new JButton("Aceptar");
+			btnAceptar.addActionListener(this);
 			btnAceptar.setBounds(335, 19, 89, 23);
 			contentPanel.add(btnAceptar);
 		}
 		{
-			JButton btnCancelar = new JButton("Cancelar");
+			btnCancelar = new JButton("Cancelar");
+			btnCancelar.addActionListener(this);
 			btnCancelar.setBounds(335, 44, 89, 23);
 			contentPanel.add(btnCancelar);
 		}
 	}
 
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnCancelar) {
+			do_btnCancelar_actionPerformed(arg0);
+		}
+		if (arg0.getSource() == btnAceptar) {
+			do_btnAceptar_actionPerformed(arg0);
+		}
+	}
+	protected void do_btnAceptar_actionPerformed(ActionEvent arg0) {
+		//Declarar variables locales
+		String nuevoPor1,nuevoPor2,nuevoPor3,nuevoPor4;
+		//Leer datos de entrada
+		nuevoPor1 = txtPorcentaje1.getText();
+		nuevoPor2 = txtPorcentaje2.getText();
+		nuevoPor3 = txtPorcentaje3.getText();
+		nuevoPor4 = txtPorcentaje4.getText();
+		//Asignar nuevos valores
+		Tienda.porcentaje1 = Double.valueOf(nuevoPor1);
+		Tienda.porcentaje2 = Double.valueOf(nuevoPor2);
+		Tienda.porcentaje3 = Double.valueOf(nuevoPor3);
+		Tienda.porcentaje4 = Double.valueOf(nuevoPor4);
+
+
+	}
+	protected void do_btnCancelar_actionPerformed(ActionEvent arg0) {
+		dispose();
+	}
 }

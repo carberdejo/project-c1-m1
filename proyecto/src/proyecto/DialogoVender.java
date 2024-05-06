@@ -49,6 +49,7 @@ public class DialogoVender extends JDialog implements ActionListener {
 	int modelo;
 	int totalCV = 0;
 	double totalIC;
+	private JButton btnCerrar;
 	/**
 	 * Launch the application.
 	 */
@@ -112,7 +113,8 @@ public class DialogoVender extends JDialog implements ActionListener {
 		btnVender.setBounds(335, 7, 89, 23);
 		contentPanel.add(btnVender);
 		
-		JButton btnCerrar = new JButton("Cerrar");
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(this);
 		btnCerrar.setBounds(335, 32, 89, 23);
 		contentPanel.add(btnCerrar);
 	}
@@ -125,6 +127,9 @@ public class DialogoVender extends JDialog implements ActionListener {
 		scpPane.setViewportView(txtS);
 }
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnCerrar) {
+			do_btnCerrar_actionPerformed(arg0);
+		}
 		if (arg0.getSource() == btnVender) {
 			do_btnVender_actionPerformed(arg0);
 		}
@@ -184,7 +189,7 @@ public class DialogoVender extends JDialog implements ActionListener {
 			mostrarResultados(tipoModelo,precio,cantidad,iCompra,iDscto,iPagar,obsequio);
 			
 			if(this.totalCV %5 == 0){
-				JOptionPane.showMessageDialog(null, "Venta numero"+totalCV+"\nImporte Total general acumulado : "+totalIC+"\nPorcentaje de la cuota diaria :", "Advertencia", JOptionPane.WARNING_MESSAGE);			
+				JOptionPane.showMessageDialog(null, "Venta numero  "+totalCV+"\nImporte Total general acumulado :  "+totalIC+"\nPorcentaje de la cuota diaria :", "Advertencia", JOptionPane.WARNING_MESSAGE);			
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -282,5 +287,8 @@ public class DialogoVender extends JDialog implements ActionListener {
 	}
 	void imprimir(String texto){
 		txtS.append(texto+'\n');
+	}
+	protected void do_btnCerrar_actionPerformed(ActionEvent arg0) {
+		dispose();
 	}
 }

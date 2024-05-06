@@ -17,6 +17,7 @@ public class DialogoCantOptima extends JDialog implements ActionListener {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCantOptim;
 	private JButton btnAceptar;
+	private JButton btnCancelar;
 
 	/**
 	 * Launch the application.
@@ -57,11 +58,15 @@ public class DialogoCantOptima extends JDialog implements ActionListener {
 		btnAceptar.setBounds(335, 11, 89, 23);
 		contentPanel.add(btnAceptar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(this);
 		btnCancelar.setBounds(335, 41, 89, 23);
 		contentPanel.add(btnCancelar);
 	}
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnCancelar) {
+			do_btnCancelar_actionPerformed(arg0);
+		}
 		if (arg0.getSource() == btnAceptar) {
 			do_btnAceptar_actionPerformed(arg0);
 		}
@@ -71,7 +76,11 @@ public class DialogoCantOptima extends JDialog implements ActionListener {
 		String nuevoPrec;
 		//Leer datos de entrada
 		nuevoPrec=this.txtCantOptim.getText();
+		//Asignar nuevo valor
 		Tienda.cantidadOptima = Integer.valueOf(nuevoPrec);
+	}
+	protected void do_btnCancelar_actionPerformed(ActionEvent arg0) {
+		dispose();
 	}
 }
 
