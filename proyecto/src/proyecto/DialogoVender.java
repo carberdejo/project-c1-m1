@@ -28,26 +28,26 @@ public class DialogoVender extends JDialog implements ActionListener {
 	private JTextArea txtS;
 	
 	//Declaracion de variables publicas
-	public static double TotalCant0;
-	public static double TotalCant1;
-	public static double TotalCant2;
-	public static double TotalCant3;
-	public static double TotalCant4;
-	public static double TotalVent0;
-	public static double TotalVent1;
-	public static double TotalVent2;
-	public static double TotalVent3;
-	public static double TotalVent4;
+	public static int TotalCant0;
+	public static int TotalCant1;
+	public static int TotalCant2;
+	public static int TotalCant3;
+	public static int TotalCant4;
+	public static int TotalVent0;
+	public static int TotalVent1;
+	public static int TotalVent2;
+	public static int TotalVent3;
+	public static int TotalVent4;
 	public static double impTotal0;
 	public static double impTotal1;
 	public static double impTotal2;
 	public static double impTotal3;
 	public static double impTotal4;
-	
+	public static int modelo;
+	public static int totalCV = 0;
 	
 	//Declaracion de variables globales
-	int modelo;
-	int totalCV = 0;
+	
 	double totalIC;
 	private JButton btnCerrar;
 	/**
@@ -183,7 +183,7 @@ public class DialogoVender extends JDialog implements ActionListener {
 			System.out.println(cantidad);
 			System.out.println(precio);
 			
-			this.totalCV++;
+			totalCV++;
 			totalIC+=iCompra;
 			
 			mostrarResultados(tipoModelo,precio,cantidad,iCompra,iDscto,iPagar,obsequio);
