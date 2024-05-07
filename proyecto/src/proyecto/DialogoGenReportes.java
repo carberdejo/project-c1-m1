@@ -21,8 +21,6 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 	private JButton btnCerrar;
 	
 	String CantOptiF0,CantOptiF1,CantOptiF2,CantOptiF3,CantOptiF4;
-	double suma = Tienda.precio0+Tienda.precio1+Tienda.precio2+Tienda.precio3+Tienda.precio4;
-	double promedio = suma/5;
 	String promPrecio0,promPrecio1,promPrecio2,promPrecio3,promPrecio4;
 	/**
 	 * Launch the application.
@@ -81,26 +79,64 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 		
 		//Leer datos de entrada
 		tipo = getTipo();
+		double[] datos = {Tienda.precio0,Tienda.precio1,Tienda.precio2,Tienda.precio3,Tienda.precio4};
+		double menorprom = datos[0];
+		double mayorprom = datos[0];
+		double sumaprom = 0;
+		double promediopre=0;
 		
-		//generar reportes
-		mostrarReporte1();
-		mostrarReporte2();
-		mostrarReporte3();
-		mostrarReporte4();
+		double[] datosAnch = {Tienda.ancho0,Tienda.ancho1,Tienda.ancho2,Tienda.ancho3,Tienda.ancho4};
+		double menorAnch = datos[0];
+		double mayorAnch = datos[0];
+		double sumaAnch = 0;
+		double promedioAnch=0;
+		
+		//Calcular promedio,mayor menor precio
+		for(double dato:datos){
+			sumaprom+=dato;
+
+			if(dato<menorprom){
+				menorprom = dato;
+			}
+			if(dato>mayorprom)
+				mayorprom=dato;
+		}
+		promediopre = sumaprom/datos.length;
+		
+		//Calcular promedio,mayor menor precio
+		for(double datoA : datosAnch){
+			sumaAnch+=datoA;
+			if(datoA<menorAnch){
+				menorAnch = datoA;
+			}
+			if(datoA>mayorAnch){
+				mayorAnch = datoA;
+			}
+		}
+		promedioAnch=sumaAnch/datosAnch.length;
+		System.out.println(mayorAnch);
 		//calcular cantidad optima
 		CantOptiF0=calcularCanOpt0();
 		CantOptiF1=calcularCanOpt1();
 		CantOptiF2=calcularCanOpt2();
 		CantOptiF3=calcularCanOpt3();
 		CantOptiF4=calcularCanOpt4();
-		//calcular precio promedio
-		promPrecio0 = calcularPP0();
-		promPrecio1 = calcularPP1();
-		promPrecio2 = calcularPP2();
-		promPrecio3 = calcularPP3();
-		promPrecio4 = calcularPP4();
 		
-		//calcular y mostrar Resultado
+		//calcular precio promedio
+		promPrecio0 = calcularPP0(promediopre);
+		promPrecio1 = calcularPP1(promediopre);
+		promPrecio2 = calcularPP2(promediopre);
+		promPrecio3 = calcularPP3(promediopre);
+		promPrecio4 = calcularPP4(promediopre);
+		
+		//generar reportes
+		mostrarReporte1();
+		mostrarReporte2();
+		mostrarReporte3();
+		mostrarReporte4(promediopre,menorprom,mayorprom,promedioAnch,menorAnch,mayorAnch);
+		
+		
+		//calcular resultado de combo box
 		switch (tipo) {
 		case 0:
 			mostrarReporte1();			
@@ -112,7 +148,7 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 			mostrarReporte3();			
 			break;
 		default:
-			mostrarReporte4();			
+			mostrarReporte4(promediopre,menorprom,mayorprom,promedioAnch,menorAnch,mayorAnch);			
 		}
 	}
 	int getTipo(){
@@ -182,43 +218,43 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 		}
 	}
 	
-	String calcularPP0(){
-		if(Tienda.precio0>promedio)
+	String calcularPP0(double promediopre){
+		if(Tienda.precio0>promediopre)
 			return "(Mayor al promedio)";
-		else if(Tienda.precio0==promedio)
+		else if(Tienda.precio0==promediopre)
 			return "(Igual al promedio)";
 		else
 			return "(Menor al promedio)";
 
 	}
-	String calcularPP1(){
-		if(Tienda.precio1>promedio)
+	String calcularPP1(double promediopre){
+		if(Tienda.precio1>promediopre)
 			return "(Mayor al promedio)";
-		else if(Tienda.precio1==promedio)
+		else if(Tienda.precio1==promediopre)
 			return "(Igual al promedio)";
 		else
 			return "(Menor al promedio)";
 	}
-	String calcularPP2(){
-		if(Tienda.precio2>promedio)
+	String calcularPP2(double promediopre){
+		if(Tienda.precio2>promediopre)
 			return "(Mayor al promedio)";
-		else if(Tienda.precio2==promedio)
+		else if(Tienda.precio2==promediopre)
 			return "(Igual al promedio)";
 		else
 			return "(Menor al promedio)";
 	}
-	String calcularPP3(){
-		if(Tienda.precio3>promedio)
+	String calcularPP3(double promediopre){
+		if(Tienda.precio3>promediopre)
 			return "(Mayor al promedio)";
-		else if(Tienda.precio3==promedio)
+		else if(Tienda.precio3==promediopre)
 			return "(Igual al promedio)";
 		else
 			return "(Menor al promedio)";
 	}
-	String calcularPP4(){
-		if(Tienda.precio4>promedio)
+	String calcularPP4(double promediopre){
+		if(Tienda.precio4>promediopre)
 			return "(Mayor al promedio)";
-		else if(Tienda.precio4==promedio)
+		else if(Tienda.precio4==promediopre)
 			return "(Igual al promedio)";
 		else
 			return "(Menor al promedio)";
@@ -280,15 +316,15 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 		txtS.append("Modelo\t:"+Tienda.modelo4+'\n');
 		txtS.append("Precio\t: S/."+Tienda.precio4+promPrecio4+'\n');
 	}
-	void mostrarReporte4(){
+	void mostrarReporte4(double promediopre,double menorprom,double mayorprom,double promedioAnch,double menorAnch,double mayorAnch){
 		txtS.setText("");
-		txtS.append("PROMEDIOS, MENORES Y MAYORES"+Tienda.modelo0+'\n'+'\n');
-		txtS.append("Precio promedio: S/. "+'\n');
-		txtS.append("Precio menor\t: S/. "+'\n');
-		txtS.append("Precio mayor\t: S/. "+'\n'+'\n');
-		txtS.append("Ancho promedio: S/. "+'\n');
-		txtS.append("Ancho menor\t: S/. "+'\n');
-		txtS.append("Ancho mayor\t: S/. "+'\n'+'\n');
+		txtS.append("PROMEDIOS, MENORES Y MAYORES"+'\n'+'\n');
+		txtS.append("Precio promedio: S/. "+promediopre+'\n');
+		txtS.append("Precio menor\t: S/. "+menorprom+'\n');
+		txtS.append("Precio mayor\t: S/. "+mayorprom+'\n'+'\n');
+		txtS.append("Ancho promedio: S/. "+promedioAnch+'\n');
+		txtS.append("Ancho menor\t: S/. "+menorAnch+'\n');
+		txtS.append("Ancho mayor\t: S/. "+mayorAnch+'\n'+'\n');
 		
 	}
 	protected void do_btnCerrar_actionPerformed(ActionEvent arg0) {

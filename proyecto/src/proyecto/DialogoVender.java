@@ -185,14 +185,15 @@ public class DialogoVender extends JDialog implements ActionListener {
 			
 			totalCV++;
 			totalIC+=iCompra;
-			
+			double porcetCuotDia=100*totalIC/Tienda.cuotaDiaria;
+			System.out.println(porcetCuotDia);
 			mostrarResultados(tipoModelo,precio,cantidad,iCompra,iDscto,iPagar,obsequio);
 			
 			if(this.totalCV %5 == 0){
-				JOptionPane.showMessageDialog(null, "Venta numero  "+totalCV+"\nImporte Total general acumulado :  "+totalIC+"\nPorcentaje de la cuota diaria :", "Advertencia", JOptionPane.WARNING_MESSAGE);			
+				JOptionPane.showMessageDialog(null, "Venta numero  "+totalCV+"\nImporte Total general acumulado :  "+totalIC+"\nPorcentaje de la cuota diaria :"+porcetCuotDia+"%", "Advertencia", JOptionPane.WARNING_MESSAGE);			
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			
 	        JOptionPane.showMessageDialog(null, "¡Cuidado! Necesitas llenar correctamente todos los inputs.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 		}
 	}
