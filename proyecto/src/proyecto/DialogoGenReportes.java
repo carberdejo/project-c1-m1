@@ -182,9 +182,7 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 	int getTipo(){
 		return cboTipo.getSelectedIndex();
 	}
-	/*double calcuPorcentaCuoDia0(){
-		return 100*DialogoVender.impTotal0/Tienda.cuotaDiaria;
-	}*/
+	
 	String calcularCanOpt0(){
 		if(DialogoVender.TotalCant0==Tienda.cantidadOptima){
 			return "(igual a la cantidad óptima)";

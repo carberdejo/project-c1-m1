@@ -28,6 +28,7 @@ public class DialogoVender extends JDialog implements ActionListener {
 	private JComboBox cboModelo;
 	private JButton btnVender;
 	private JTextArea txtS;
+	private JButton btnCerrar;
 	
 	//Declaracion de variables publicas
 	public static int TotalCant0;
@@ -45,13 +46,10 @@ public class DialogoVender extends JDialog implements ActionListener {
 	public static double impTotal2;
 	public static double impTotal3;
 	public static double impTotal4;
-	public static int modelo;
 	public static int totalCV = 0;
+	public static double totalIC;
 	
-	//Declaracion de variables globales
-	
-	double totalIC;
-	private JButton btnCerrar;
+	int modelo;
 	/**
 	 * Launch the application.
 	 */
@@ -172,13 +170,13 @@ public class DialogoVender extends JDialog implements ActionListener {
 			double precio = Double.valueOf(this.txtPrecio.getText());
 			
 			//Proceso de calculo
-			iCompra = calcularIC(modelo,cantidad);
+			iCompra = calcularIC(cantidad);
 			iDscto = calcularID(iCompra,cantidad);
 			iPagar = calcularIP(iCompra,iDscto);
 			obsequio = calcularOb(cantidad);
-			tipoModelo = calcularTP(modelo);
+			tipoModelo = calcularTP();
 			//Calcular acumulador
-			incrementadorAcum(modelo,cantidad,iCompra);
+			incrementadorAcum(cantidad,iCompra);
 			
 			//Incrementador total
 			totalCV++;
@@ -208,7 +206,7 @@ public class DialogoVender extends JDialog implements ActionListener {
 	}
 	
 	//calcular icompra
-	double calcularIC(int modelo,int cantidad){
+	double calcularIC(int cantidad){
 		switch(modelo){
 			case 0: return Tienda.precio0*cantidad;
 			case 1: return Tienda.precio1*cantidad;
@@ -245,7 +243,7 @@ public class DialogoVender extends JDialog implements ActionListener {
 	}
 	
 	//calcularTipo de Modelo
-	String calcularTP(int modelo){
+	String calcularTP(){
 		switch(modelo){
 			case 0: return Tienda.modelo0;
 			case 1: return Tienda.modelo1;
@@ -256,7 +254,7 @@ public class DialogoVender extends JDialog implements ActionListener {
 	}
 	
 	//Contador y acumulador del Total de ventas,total de cantidades y total de importe
-	void incrementadorAcum(int modelo,int cantidad,double iCompra){
+	void incrementadorAcum(int cantidad,double iCompra){
 		switch(modelo){
 		case 0: TotalVent0++;
 		 		TotalCant0+=cantidad;  //CantTotal=CantTotal+cantidad

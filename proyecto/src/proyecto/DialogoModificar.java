@@ -219,13 +219,14 @@ public class DialogoModificar extends JDialog implements ActionListener {
 		//Declarar Variables
 		String newPrice,newAlto,newAncho,newFondo,newQuemadores;
 		int index;
+		
 		//Leer datos de entrada
-		newPrice = this.txtPrecio.getText();
-		newAlto = this.txtAlto.getText();
-		newAncho = this.txtAncho.getText();
-		newFondo = this.txtFondo.getText();
-		newQuemadores = this.txtQuemadores.getText();
-		index = this.cboCodigo.getSelectedIndex();
+		newPrice = txtPrecio.getText();
+		newAlto = txtAlto.getText();
+		newAncho = txtAncho.getText();
+		newFondo = txtFondo.getText();
+		newQuemadores = txtQuemadores.getText();
+		index = cboCodigo.getSelectedIndex();
 		
 		System.out.println(newPrice);
 		System.out.println(index);
@@ -267,7 +268,6 @@ public class DialogoModificar extends JDialog implements ActionListener {
 			Tienda.quemadores4 = Integer.valueOf(newQuemadores);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
 			JOptionPane.showMessageDialog(null, "¡Cuidado! Necesitas llenar correctamente todos los inputs.", "Advertencia", JOptionPane.WARNING_MESSAGE);		}
 	}
 }		

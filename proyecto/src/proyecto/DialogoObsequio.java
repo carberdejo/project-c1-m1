@@ -104,7 +104,6 @@ public class DialogoObsequio extends JDialog implements ActionListener {
 		Tienda.obsequio3 = nuevoObs3;
 		
 		} catch (Exception e) {
-			System.out.println(e);
 			JOptionPane.showMessageDialog(null, "¡Cuidado! Necesitas llenar correctamente todos los inputs.", "Advertencia", JOptionPane.WARNING_MESSAGE);		}
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {
