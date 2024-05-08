@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -44,11 +45,11 @@ public class DialogoCantOptima extends JDialog implements ActionListener {
 		contentPanel.setLayout(null);
 		
 		JLabel lblCantOptim = new JLabel("Cantidad Optima de Unidades Vendidas");
-		lblCantOptim.setBounds(10, 29, 216, 14);
+		lblCantOptim.setBounds(10, 29, 249, 14);
 		contentPanel.add(lblCantOptim);
 		
 		txtCantOptim = new JTextField();
-		txtCantOptim.setBounds(227, 23, 59, 23);
+		txtCantOptim.setBounds(239, 25, 59, 23);
 		contentPanel.add(txtCantOptim);
 		txtCantOptim.setColumns(10);
 		txtCantOptim.setText(String.valueOf(Tienda.cantidadOptima));
@@ -72,12 +73,18 @@ public class DialogoCantOptima extends JDialog implements ActionListener {
 		}
 	}
 	protected void do_btnAceptar_actionPerformed(ActionEvent arg0) {
+		try {
+			
+		
 		//declaracion de variables
 		String nuevoPrec;
 		//Leer datos de entrada
-		nuevoPrec=this.txtCantOptim.getText();
+		nuevoPrec=txtCantOptim.getText();
 		//Asignar nuevo valor
 		Tienda.cantidadOptima = Integer.valueOf(nuevoPrec);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "¡Cuidado! Necesitas llenar correctamente todos los inputs.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+		}
 	}
 	protected void do_btnCancelar_actionPerformed(ActionEvent arg0) {
 		dispose();

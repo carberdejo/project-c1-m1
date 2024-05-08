@@ -2,6 +2,8 @@ package proyecto;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.text.DecimalFormat;
+
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -170,27 +172,31 @@ public class DialogoVender extends JDialog implements ActionListener {
 			double precio = Double.valueOf(this.txtPrecio.getText());
 			
 			//Proceso de calculo
-			iCompra=calcularIC(modelo,cantidad);
-			iDscto=calcularID(iCompra,cantidad);
-			iPagar=calcularIP(iCompra,iDscto);
-			obsequio=calcularOb(cantidad);
-			tipoModelo=calcularTP(modelo);
+			iCompra = calcularIC(modelo,cantidad);
+			iDscto = calcularID(iCompra,cantidad);
+			iPagar = calcularIP(iCompra,iDscto);
+			obsequio = calcularOb(cantidad);
+			tipoModelo = calcularTP(modelo);
 			//Calcular acumulador
 			incrementadorAcum(modelo,cantidad,iCompra);
-			//Advertencia
 			
-			//Mostrar resultado
-			System.out.println(cantidad);
-			System.out.println(precio);
-			
+			//Incrementador total
 			totalCV++;
 			totalIC+=iCompra;
-			double porcetCuotDia=100*totalIC/Tienda.cuotaDiaria;
-			System.out.println(porcetCuotDia);
+			
+			//Calcular porcentaje cuota diaria
+			double porcentajeCuotDia=100*totalIC/Tienda.cuotaDiaria;
+			
+			//Convertirlo a un decimal cn 2 unidades
+			DecimalFormat df = new DecimalFormat("#.00");
+			String porcenCuoDia = df.format(porcentajeCuotDia);
+			
+			//Mostrar resultado
 			mostrarResultados(tipoModelo,precio,cantidad,iCompra,iDscto,iPagar,obsequio);
 			
-			if(this.totalCV %5 == 0){
-				JOptionPane.showMessageDialog(null, "Venta numero  "+totalCV+"\nImporte Total general acumulado :  "+totalIC+"\nPorcentaje de la cuota diaria :"+porcetCuotDia+"%", "Advertencia", JOptionPane.WARNING_MESSAGE);			
+			//Alerta
+			if(totalCV %5 == 0){
+				JOptionPane.showMessageDialog(null, "Venta numero  "+totalCV+"\nImporte Total general acumulado :  "+totalIC+"\nPorcentaje de la cuota diaria :"+porcenCuoDia+"%", "Advertencia", JOptionPane.WARNING_MESSAGE);			
 			}
 		} catch (Exception e) {
 			
@@ -238,8 +244,6 @@ public class DialogoVender extends JDialog implements ActionListener {
 			return Tienda.obsequio3;
 	}
 	
-	
-	
 	//calcularTipo de Modelo
 	String calcularTP(int modelo){
 		switch(modelo){
@@ -250,13 +254,13 @@ public class DialogoVender extends JDialog implements ActionListener {
 			default: return Tienda.modelo4;
 		}
 	}
-	//Contador y acumulador del Total de ventas,total de cantidades y total de importe
 	
+	//Contador y acumulador del Total de ventas,total de cantidades y total de importe
 	void incrementadorAcum(int modelo,int cantidad,double iCompra){
 		switch(modelo){
 		case 0: TotalVent0++;
 		 		TotalCant0+=cantidad;  //CantTotal=CantTotal+cantidad
-				impTotal0+=iCompra;
+				impTotal0+=iCompra;//CantTotal=CantTotal+iCompra
 				break;
 		case 1: TotalVent1++;
 				TotalCant1+=cantidad;
@@ -275,16 +279,16 @@ public class DialogoVender extends JDialog implements ActionListener {
 		  		impTotal4+=iCompra;		
 		}
 	}
-	
+	//mostrar resultados
 	void mostrarResultados(String tipoModelo,double precio,int cantidad,double iCompra,double iDscto,double iPagar,String obsequio){
 		txtS.setText("");
-		imprimir("Modelo : /S. "+tipoModelo);
-		imprimir("Precio : /S. "+precio);
-		imprimir("Cantidad : /S. "+cantidad);
-		imprimir("Importe compra : /S. "+iCompra);
-		imprimir("Importe de descuento : /S. "+iDscto);
-		imprimir("Importe a pagar : /S. "+iPagar);
-		imprimir("Obsequio : "+obsequio);
+		imprimir("Modelo\t\t: S/. "+tipoModelo);
+		imprimir("Precio\t\t: S/. "+precio);
+		imprimir("Cantidad\t\t: S/. "+cantidad);
+		imprimir("Importe compra\t\t: S/. "+iCompra);
+		imprimir("Importe de descuento\t: S/. "+iDscto);
+		imprimir("Importe a pagar\t\t: S/. "+iPagar);
+		imprimir("Obsequio\t\t: "+obsequio);
 	}
 	void imprimir(String texto){
 		txtS.append(texto+'\n');

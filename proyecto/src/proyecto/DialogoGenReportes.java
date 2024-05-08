@@ -1,6 +1,7 @@
 package proyecto;
 
 import java.awt.BorderLayout;
+
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -13,15 +14,37 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
-
+import java.text.DecimalFormat;
 public class DialogoGenReportes extends JDialog implements ActionListener {
 	private JComboBox cboTipo;
 	private JTextArea txtS;
 	private JButton btnCerrar;
 	
-	String CantOptiF0,CantOptiF1,CantOptiF2,CantOptiF3,CantOptiF4;
-	String promPrecio0,promPrecio1,promPrecio2,promPrecio3,promPrecio4;
+	String CantOptiF0, CantOptiF1, CantOptiF2, CantOptiF3, CantOptiF4;
+	String promPrecio0, promPrecio1, promPrecio2, promPrecio3, promPrecio4;
+	
+	//Calcular porcentaje cuota diaria y convertirle a decimal de 2 numeros
+	double porcenCuotDia0 = 100 * DialogoVender.impTotal0 / Tienda.cuotaDiaria;
+	DecimalFormat df0 = new DecimalFormat("#.00");
+	String devPorceCuoDia0 = df0.format(porcenCuotDia0);
+	
+	double porcenCuotDia1 = 100 * DialogoVender.impTotal1 / Tienda.cuotaDiaria;
+	DecimalFormat df1 = new DecimalFormat("#.00");
+	String devPorceCuoDia1 = df1.format(porcenCuotDia1);
+
+	double porcenCuotDia2 = 100 * DialogoVender.impTotal2 / Tienda.cuotaDiaria;
+	DecimalFormat df2 = new DecimalFormat("#.00");
+	String devPorceCuoDia2 = df1.format(porcenCuotDia2);
+
+	double porcenCuotDia3 = 100 * DialogoVender.impTotal3 / Tienda.cuotaDiaria;
+	DecimalFormat df3 = new DecimalFormat("#.00");
+	String devPorceCuoDia3 = df1.format(porcenCuotDia3);
+
+	double porcenCuotDia4 = 100 * DialogoVender.impTotal4 / Tienda.cuotaDiaria;
+	DecimalFormat df4 = new DecimalFormat("#.00");
+	String devPorceCuoDia4 = df1.format(porcenCuotDia4);
 	/**
 	 * Launch the application.
 	 */
@@ -74,10 +97,10 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 		}
 	}
 	protected void do_cboTipo_actionPerformed(ActionEvent arg0) {
-		//Declaracion de variables
-		int tipo;
 		
-		//Leer datos de entrada
+		//Declaracion de variables y Leer datos de entrada locales
+		int tipo;
+			
 		tipo = getTipo();
 		double[] datos = {Tienda.precio0,Tienda.precio1,Tienda.precio2,Tienda.precio3,Tienda.precio4};
 		double menorprom = datos[0];
@@ -86,8 +109,8 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 		double promediopre=0;
 		
 		double[] datosAnch = {Tienda.ancho0,Tienda.ancho1,Tienda.ancho2,Tienda.ancho3,Tienda.ancho4};
-		double menorAnch = datos[0];
-		double mayorAnch = datos[0];
+		double menorAnch = datosAnch[0];
+		double mayorAnch = datosAnch[0];
 		double sumaAnch = 0;
 		double promedioAnch=0;
 		
@@ -109,12 +132,17 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 			if(datoA<menorAnch){
 				menorAnch = datoA;
 			}
-			if(datoA>mayorAnch){
+			/*if(datoA>mayorAnch){
 				mayorAnch = datoA;
+			}*/
+		}
+		for(int i=1;i<datosAnch.length;i++){
+			if(datosAnch[i]>mayorAnch){
+				mayorAnch=datosAnch[i];
 			}
 		}
 		promedioAnch=sumaAnch/datosAnch.length;
-		System.out.println(mayorAnch);
+			
 		//calcular cantidad optima
 		CantOptiF0=calcularCanOpt0();
 		CantOptiF1=calcularCanOpt1();
@@ -154,6 +182,9 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 	int getTipo(){
 		return cboTipo.getSelectedIndex();
 	}
+	/*double calcuPorcentaCuoDia0(){
+		return 100*DialogoVender.impTotal0/Tienda.cuotaDiaria;
+	}*/
 	String calcularCanOpt0(){
 		if(DialogoVender.TotalCant0==Tienda.cantidadOptima){
 			return "(igual a la cantidad óptima)";
@@ -169,13 +200,13 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 		if(DialogoVender.TotalCant1==Tienda.cantidadOptima){
 			return "(igual a la cantidad óptima)";
 			
-		}else if(DialogoVender.TotalCant1>Tienda.cantidadOptima){
-			return DialogoVender.TotalCant1-Tienda.cantidadOptima+" más que la cantidad óptima";
+		}else if(DialogoVender.TotalCant1 > Tienda.cantidadOptima){
+			return DialogoVender.TotalCant1 - Tienda.cantidadOptima + " más que la cantidad óptima";
 			
-		}else if(DialogoVender.TotalCant0==0){
+		}else if(DialogoVender.TotalCant0 == 0){
 			return " No compro nada ";
 		}else{
-			return Tienda.cantidadOptima-DialogoVender.TotalCant1+" menos que la cantidad óptima";
+			return Tienda.cantidadOptima - DialogoVender.TotalCant1+ " menos que la cantidad óptima";
 		}
 	}
 	String calcularCanOpt2(){
@@ -262,30 +293,32 @@ public class DialogoGenReportes extends JDialog implements ActionListener {
 	
 	void mostrarReporte1(){
 		txtS.setText("");
-		txtS.append("VENTAS POR MODELO"+'\n');
-		txtS.append("Modelo : "+Tienda.modelo0+'\n');
-		txtS.append("Cantidad de ventas : "+DialogoVender.TotalVent0+'\n');
-		txtS.append("Cantidad de  unidades vendidas : "+DialogoVender.TotalVent1+'\n');
-		txtS.append("Importe total vendido : "+DialogoVender.impTotal0+'\n');
-		txtS.append("Aporte a la cuota diaria : "+Tienda.modelo0+'\n'+'\n');
-		txtS.append("VENTAS POR MODELO"+'\n');
-		txtS.append("Modelo : "+Tienda.modelo0+'\n');
-		txtS.append("Cantidad de ventas : "+DialogoVender.TotalVent0+'\n');
-		txtS.append("Cantidad de unidades vendidas : "+DialogoVender.TotalVent1+'\n');
-		txtS.append("Importe total vendido : "+DialogoVender.impTotal0+'\n');
-		txtS.append("Aporte a la cuota diaria : "+Tienda.modelo0+'\n'+'\n');
-		txtS.append("VENTAS POR MODELO"+'\n');
-		txtS.append("Modelo : "+Tienda.modelo0+'\n');
-		txtS.append("Cantidad de ventas : "+DialogoVender.TotalVent0+'\n');
-		txtS.append("Cantidad de unidades vendidas : "+DialogoVender.TotalVent1+'\n');
-		txtS.append("Importe total vendido : "+DialogoVender.impTotal0+'\n');
-		txtS.append("Aporte a la cuota diaria : "+Tienda.modelo0+'\n'+'\n');
-		txtS.append("VENTAS POR MODELO"+'\n');
-		txtS.append("Modelo : "+Tienda.modelo0+'\n');
-		txtS.append("Cantidad de ventas : "+DialogoVender.TotalVent0+'\n');
-		txtS.append("Cantidad de unidades vendidas : "+DialogoVender.TotalVent1+'\n');
-		txtS.append("Importe total vendido : "+DialogoVender.impTotal0+'\n');
-		txtS.append("Aporte a la cuota diaria : "+Tienda.modelo0+'\n'+'\n');
+		txtS.append("VENTAS POR MODELO"+'\n'+'\n');
+		txtS.append("Modelo\t\t: " + Tienda.modelo0+'\n');
+		txtS.append("Cantidad de ventas\t: "+DialogoVender.TotalVent0+'\n');
+		txtS.append("Cantidad de  unidades vendidas: " + DialogoVender.TotalCant0+'\n');
+		txtS.append("Importe total vendido\t: " + DialogoVender.impTotal0+'\n');
+		txtS.append("Aporte a la cuota diaria\t: " + devPorceCuoDia0+" %"+'\n'+'\n');
+		txtS.append("Modelo\t\t: "+Tienda.modelo1+'\n');
+		txtS.append("Cantidad de ventas\t: " + DialogoVender.TotalVent1+'\n');
+		txtS.append("Cantidad de unidades vendidas : " + DialogoVender.TotalCant1+'\n');
+		txtS.append("Importe total vendido\t: " + DialogoVender.impTotal1+'\n');
+		txtS.append("Aporte a la cuota diaria\t: " + devPorceCuoDia1+" %"+'\n'+'\n');
+		txtS.append("Modelo\t\t: " + Tienda.modelo2 + '\n');
+		txtS.append("Cantidad de ventas\t: " + DialogoVender.TotalVent2+'\n');
+		txtS.append("Cantidad de unidades vendidas : " + DialogoVender.TotalCant2+'\n');
+		txtS.append("Importe total vendido\t: " + DialogoVender.impTotal2+'\n');
+		txtS.append("Aporte a la cuota diaria\t: " + devPorceCuoDia2+" %"+'\n'+'\n');
+		txtS.append("Modelo\t\t: " + Tienda.modelo3+'\n');
+		txtS.append("Cantidad de ventas\t: "+DialogoVender.TotalVent3+'\n');
+		txtS.append("Cantidad de unidades vendidas : "+DialogoVender.TotalCant3+'\n');
+		txtS.append("Importe total vendido\t: " + DialogoVender.impTotal3+'\n');
+		txtS.append("Aporte a la cuota diaria\t: "+devPorceCuoDia3+ "%"+'\n'+'\n');
+		txtS.append("Modelo\t\t: "+Tienda.modelo4+'\n');
+		txtS.append("Cantidad de ventas\t: "+DialogoVender.TotalVent4+'\n');
+		txtS.append("Cantidad de unidades vendidas : "+DialogoVender.TotalCant4+'\n');
+		txtS.append("Importe total vendido\t: "+DialogoVender.impTotal4+'\n');
+		txtS.append("Aporte a la cuota diaria\t: "+devPorceCuoDia4+ "%"+'\n'+'\n');
 	}
 	void mostrarReporte2(){
 		txtS.setText("");

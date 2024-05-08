@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -146,12 +147,13 @@ public class DialogoModificar extends JDialog implements ActionListener {
 	}
 	
 	protected void do_cboCodigo_actionPerformed(ActionEvent arg0) {
+		//Declaracion y leer datos
 		int modelo = getModelo();
 		double precio = getPrecio(modelo);
 		double ancho = getAncho(modelo);
 		double alto = getAlto(modelo);
 		double fondo = getFondo(modelo);
-		double quemadores = getQuemadores(modelo);
+		int quemadores = getQuemadores(modelo);
 		
 		//Devolver valor a la caja de texto
 		this.txtPrecio.setText(String.valueOf(precio));
@@ -165,7 +167,7 @@ public class DialogoModificar extends JDialog implements ActionListener {
 		return cboCodigo.getSelectedIndex();
 	}
 	
-	// Add 
+	// Asignar valores a la caja de texto
 	double getPrecio(int modelo){
 		switch(modelo){
 		case 0: return Tienda.precio0;
@@ -202,7 +204,7 @@ public class DialogoModificar extends JDialog implements ActionListener {
 		default: return Tienda.fondo4;
 		}
 	}
-	double getQuemadores(int modelo){
+	int getQuemadores(int modelo){
 		switch(modelo){
 		case 0: return Tienda.quemadores0;
 		case 1: return Tienda.quemadores1;
@@ -212,6 +214,8 @@ public class DialogoModificar extends JDialog implements ActionListener {
 		}
 	}
 	protected void do_btnGrabar_actionPerformed(ActionEvent arg0) {
+		try {
+			
 		//Declarar Variables
 		String newPrice,newAlto,newAncho,newFondo,newQuemadores;
 		int index;
@@ -222,6 +226,7 @@ public class DialogoModificar extends JDialog implements ActionListener {
 		newFondo = this.txtFondo.getText();
 		newQuemadores = this.txtQuemadores.getText();
 		index = this.cboCodigo.getSelectedIndex();
+		
 		System.out.println(newPrice);
 		System.out.println(index);
 		//PROCESO DE CALCULO
@@ -260,9 +265,10 @@ public class DialogoModificar extends JDialog implements ActionListener {
 			Tienda.ancho4 = Double.valueOf(newAncho);
 			Tienda.fondo4 = Double.valueOf(newFondo);
 			Tienda.quemadores4 = Integer.valueOf(newQuemadores);
-			
-		
-		}
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "¡Cuidado! Necesitas llenar correctamente todos los inputs.", "Advertencia", JOptionPane.WARNING_MESSAGE);		}
 	}
 }		
 

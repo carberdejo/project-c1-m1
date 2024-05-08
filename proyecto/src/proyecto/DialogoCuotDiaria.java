@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -36,7 +37,7 @@ public class DialogoCuotDiaria extends JDialog implements ActionListener {
 	 * Create the dialog.
 	 */
 	public DialogoCuotDiaria() {
-		setTitle("Configurar cantidad \u00F3ptima ");
+		setTitle("Configurar cuota diaria ");
 		setBounds(100, 100, 450, 117);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -48,7 +49,7 @@ public class DialogoCuotDiaria extends JDialog implements ActionListener {
 		contentPanel.add(lblCantOptim);
 		
 		txtCuotDia = new JTextField();
-		txtCuotDia.setBounds(159, 23, 127, 23);
+		txtCuotDia.setBounds(171, 25, 127, 23);
 		contentPanel.add(txtCuotDia);
 		txtCuotDia.setColumns(10);
 		numeroCO();
@@ -64,9 +65,7 @@ public class DialogoCuotDiaria extends JDialog implements ActionListener {
 		btnCancelar.setBounds(335, 44, 89, 23);
 		contentPanel.add(btnCancelar);
 	}
-	void numeroCO(){
-		this.txtCuotDia.setText(String.valueOf(Tienda.cuotaDiaria));
-	}
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCancelar) {
 			do_btnCancelar_actionPerformed(e);
@@ -75,11 +74,18 @@ public class DialogoCuotDiaria extends JDialog implements ActionListener {
 			do_btnAceptar_actionPerformed(e);
 		}
 	}
+	void numeroCO(){
+		txtCuotDia.setText(String.valueOf(Tienda.cuotaDiaria));
+	}
 	protected void do_btnAceptar_actionPerformed(ActionEvent e) {
-		String newPrecio = this.txtCuotDia.getText();
+		try {
+			
+		
+		String newPrecio = txtCuotDia.getText();
 		Tienda.cuotaDiaria = Double.valueOf(newPrecio);
 		System.out.println(Tienda.cuotaDiaria);
-		//Tienda.cuotaDiaria=Integer.parseInt(txtCantOptim.getText());
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(null, "¡Cuidado! Necesitas llenar correctamente todos los inputs.", "Advertencia", JOptionPane.WARNING_MESSAGE);		}
 	}
 	protected void do_btnCancelar_actionPerformed(ActionEvent e) {
 		dispose();

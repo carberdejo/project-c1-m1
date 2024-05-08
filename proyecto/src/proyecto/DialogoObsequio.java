@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -89,6 +90,8 @@ public class DialogoObsequio extends JDialog implements ActionListener {
 		}
 	}
 	protected void do_btnAcept_actionPerformed(ActionEvent arg0) {
+		try {
+			
 		//Declarar variables locales
 		String nuevoObs1,nuevoObs2,nuevoObs3;
 		//Leer datos de entrada
@@ -99,6 +102,10 @@ public class DialogoObsequio extends JDialog implements ActionListener {
 		Tienda.obsequio1 = nuevoObs1;
 		Tienda.obsequio2 = nuevoObs2;
 		Tienda.obsequio3 = nuevoObs3;
+		
+		} catch (Exception e) {
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "¡Cuidado! Necesitas llenar correctamente todos los inputs.", "Advertencia", JOptionPane.WARNING_MESSAGE);		}
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {
 		dispose();

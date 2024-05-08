@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -116,6 +117,9 @@ public class DialogoDescuento extends JDialog implements ActionListener {
 		}
 	}
 	protected void do_btnAceptar_actionPerformed(ActionEvent arg0) {
+		try {
+			
+		
 		//Declarar variables locales
 		String nuevoPor1,nuevoPor2,nuevoPor3,nuevoPor4;
 		//Leer datos de entrada
@@ -128,7 +132,8 @@ public class DialogoDescuento extends JDialog implements ActionListener {
 		Tienda.porcentaje2 = Double.valueOf(nuevoPor2);
 		Tienda.porcentaje3 = Double.valueOf(nuevoPor3);
 		Tienda.porcentaje4 = Double.valueOf(nuevoPor4);
-
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "¡Cuidado! Necesitas llenar correctamente todos los inputs.", "Advertencia", JOptionPane.WARNING_MESSAGE);		}
 
 	}
 	protected void do_btnCancelar_actionPerformed(ActionEvent arg0) {
